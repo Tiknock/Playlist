@@ -28,3 +28,37 @@
 //         artist: "Laurent Voulzi",
 //         music: "./music/Avril.mp3"
 //     }
+
+
+
+
+// {
+//     img: "./images/Broken.jpg",
+//     name: "If I needed you",
+//     artist: "The Broken Circle",
+//     music: "./music/Broken.mp3"
+// },
+// {
+//     img: "./images/Gladiator.jpg",
+//     name: "Now We Are Free",
+//     artist: "Gladiator ",
+//     music: "./music/Gladiator.mp3"
+// },
+// {
+//     img: "./images/Christiana.jpg",
+//     name: "Respect",
+//     artist: "Christiana",
+//     music: "./music/Christiana.mp3"
+// },
+// {
+//     img: "./images/Marley.jpg",
+//     name: "I wanna love you",
+//     artist: "Bob Marley",
+//     music: "./music/Marley.mp3"
+// },
+// {
+//     img: "./images/Wayne.jpg",
+//     name: "Three Wives",
+//     artist: "Bob Wayne",
+//     music: "./music/Wayne.mp3"
+// }
