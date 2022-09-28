@@ -1,0 +1,30 @@
+// {
+//         img: "./images/Mazue.jpg",
+//         name: "La liesse est lovée",
+//         artist: "Ben Mazué",
+//         music: "./music/Liesse.mp3"
+//     },
+//     {
+//         img: "./images/Lemay.jpg",
+//         name: "Mon drame",
+//         artist: "Lynda Lemay",
+//         music: "./music/Drame.mp3"
+//     },
+//     {
+//         img: "./images/Volo.jpg",
+//         name: "C'est toi",
+//         artist: "Volo",
+//         music: "./music/Volo.mp3"
+//     },
+//     {
+//         img: "./images/Kouizine.jfif",
+//         name: "A la kouizine",
+//         artist: "Genjutsu Beats",
+//         music: "./music/Kouizine.mp3"
+//     },
+//     {
+//         img: "./images/Voulzi.jpg",
+//         name: "La fille d'avril",
+//         artist: "Laurent Voulzi",
+//         music: "./music/Avril.mp3"
+//     }
