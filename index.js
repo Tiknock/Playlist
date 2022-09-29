@@ -3,18 +3,10 @@ const trackArt = document.querySelector('.track-art')
 const trackName = document.querySelector('.track-name');
 const trackArtist = document.querySelector('.track-artist');
 
-const pPT =document.getElementById('pPT');
-const playPauseBtn = document.querySelector('.playpause-track');
-const nextBtn = document.querySelector(".next-track");
-const prevBtn = document.querySelector('.prev-track');
-
-const seekSlider = document.querySelector('.seek_slider');
-const volumeSlider = document.querySelector('.volume_slider');
-const currTime = document.querySelector('.current-time');
-const totalDuration = document.querySelector('.total-duration');
-const wave = document.getElementById('wave');
+const seekSlider = document.getElementById('seekSlider')
 const randomIcon = document.querySelector('.fa-random');
 const repeatIcon = document.querySelector('.fa-repeat');
+
 const currTrack = document.createElement('audio');
 
 let trackIndex = 0;
@@ -22,6 +14,14 @@ let isPlaying = false;
 let isRandom = false;
 let updateTimer;
 let isRepeat = false;
+
+// const musicList = []
+
+// fetch("./music.json")
+// .then(response => {
+//    return response.json();
+// })
+// .then(data => console.log(data));
 
 const musicList = [
     {
@@ -55,6 +55,7 @@ const musicList = [
         music: "./music/Avril.mp3"
     }
 ]
+
 loadTrack(trackIndex)
 
 function loadTrack(trackIndex) {
@@ -108,28 +109,99 @@ function reset() {
     totalDuration.textContent = "00:00";
     seekSlider.value = 0;
 }
-function randomTrack(){
-    isRandom ? pauseRandom() : playRandom();
-}
-function playRandom(){
-    isRandom = true;
+const randomTrack = () => {
+    if (isRandom) {
+        isRandom = false;
+        randomIcon.classList.remove('active')
+    } else {
+        isRandom = true;
     randomIcon.classList.add('active');
+    }
 }
-function pauseRandom(){
-    isRandom = false;
-    randomIcon.classList.remove('active')
+const repeatTrack = () => {
+    if (isRepeat) {
+        isRepeat = false;
+        repeatIcon.classList.remove('active')
+    } else {
+        isRepeat = true;
+        repeatIcon.classList.add('active');
+    }
 }
-function repeatTrack(){
-    isRepeat ? pauseRepeat() : playRepeat();
+const playPauseTrack = () => {
+    isPlaying ? pauseTrack() : playTrack();
 }
-function playRepeat(){
-    isRepeat = true;
-    repeatIcon.classList.add('active');
+const playTrack = () => {
+    currTrack.play();
+    isPlaying = true;
+    trackArt.classList.add("rotate");
+    wave.classList.add('loader');
+    playPauseBtn.innerHTML = '<i class="fa fa-pause-circle"></i>';
 }
-function pauseRepeat(){
-    isRepeat = false;
-    repeatIcon.classList.remove('active')
+const pauseTrack = () => {
+    currTrack.pause();
+    isPlaying = false;
+    trackArt.classList.remove("rotate");
+    wave.classList.remove('loader');
+    playPauseBtn.innerHTML ="<i class='fa fa-play-circle'></i>";
 }
+const nextTrack = () => {
+    if(trackIndex < musicList.length - 1 && isRandom === false) {
+        trackIndex += 1;
+    } else if( trackIndex < musicList.length - 1 && isRandom === true) {
+        let randomIndex = Number.parseInt(Math.random() * musicList.length);
+        trackIndex = randomIndex;
+    } else {
+        trackIndex = 0;
+    }
+    loadTrack(trackIndex);
+    playTrack();
+}
+const prevTrack = () => {
+    if(trackIndex > 0) {
+        trackIndex -=1;
+    } else {
+        trackIndex = musicList.length -1;
+    }
+    loadTrack(trackIndex);
+    playTrack();
+}
+const seekTo = () => {
+    let seekto = currTrack.duration * (seekSlider.value / 100);
+    currTrack.currentTime = seekto;
+}
+const setVolume = () =>{
+    currTrack.volume = volumeSlider.value /100
+}
+
+
+function setUpdate() {
+    let seekPosition = 0;
+    if (!isNaN(currTrack.duration)){
+        seekPosition = currTrack.currentTime * (100 / currTrack.duration);
+        seekSlider.value = seekPosition;
+
+            let currMinutes = Math.floor(currTrack.currentTime / 60);
+            let currSeconds = Math.floor(currTrack.currentTime - currMinutes * 60);
+            let durationMinutes = Math.floor(currTrack.duration / 60);
+            let durationSeconds = Math.floor(currTrack.duration - durationMinutes * 60);
+            
+            if(currSeconds < 10) {currSeconds = "0" + currSeconds;}
+            if(durationSeconds < 10) {durationSeconds = "0" + durationSeconds;}
+            if(currMinutes < 10) {currMinutes = "0" + currMinutes;}
+            if(durationMinutes < 10) {durationMinutes = "0" + durationMinutes;}
+
+            currTime.textContent = currMinutes + ":" + currSeconds;
+            totalDuration.textContent = durationMinutes + ":" + durationSeconds;
+    }
+}
+
+seekSlider.addEventListener('change', seekTo);
+volumeSlider.addEventListener('change', setVolume);
+randomBtn.addEventListener('click', randomTrack);
+prevBtn.addEventListener('click', prevTrack);
+playPauseBtn.addEventListener('click', playPauseTrack);
+nextBtn.addEventListener('click', nextTrack);
+repeatBtn.addEventListener('click', repeatTrack);
 document.addEventListener('keydown', function(event) {
     const key = event.key;
     if (key === " ") {
@@ -144,71 +216,3 @@ document.addEventListener('keydown', function(event) {
         randomTrack();
     }
 });
-function playPauseTrack() {
-    isPlaying ? pauseTrack() : playTrack();
-}
-function playTrack() {
-    currTrack.play();
-    isPlaying = true;
-    trackArt.classList.add("rotate");
-    wave.classList.add('loader');
-    pPT.innerHTML = '<i class="fa fa-pause-circle fa-5x"></i>';
-}
-function pauseTrack() {
-    currTrack.pause();
-    isPlaying = false;
-    trackArt.classList.remove("rotate");
-    wave.classList.remove('loader');
-    pPT.innerHTML ="<i class='fa fa-play-circle fa-5x'></i>";
-}
-function nextTrack(){
-    if(trackIndex < musicList.length - 1 && isRandom === false) {
-        trackIndex += 1;
-    } else if( trackIndex < musicList.length - 1 && isRandom === true) {
-        let randomIndex = Number.parseInt(Math.random() * musicList.length);
-        trackIndex = randomIndex;
-    } else {
-        trackIndex = 0;
-    }
-    loadTrack(trackIndex);
-    playTrack();
-}
-function prevTrack() {
-    if(trackIndex > 0) {
-        trackIndex -=1;
-    } else {
-        trackIndex = musicList.length -1;
-    }
-    loadTrack(trackIndex);
-    playTrack();
-}
-function seekTo() {
-    let seekto = currTrack.duration * (seekSlider.value / 100);
-    currTrack.currentTime = seekto;
-}
-function setVolume(){
-    currTrack.volume = volumeSlider.value /100
-}
-
-
-
-function setUpdate() {
-    let seekPosition = 0;
-    if (!isNaN(currTrack.duration)){
-        seekPosition = currTrack.currentTime * (100 / currTrack.duration);
-        seekSlider.value = seekPosition;
-
-            let currMinutes = Math.floor(currTrack.currentTime / 60);
-            let currSeconds = Math.floor(currTrack.currentTime - currMinutes * 60);
-            let durationMinutes = Math.floor(currTrack.duration / 60);
-            let durationSeconds = Math.floor(currTrack.duration - durationMinutes * 60);
-
-            if(currSeconds < 10) {currSeconds = "0" + currSeconds;}
-            if(durationSeconds < 10) {durationSeconds = "0" + durationSeconds;}
-            if(currMinutes < 10) {currMinutes = "0" + currMinutes;}
-            if(durationMinutes < 10) {durationMinutes = "0" + durationMinutes;}
-
-            currTime.textContent = currMinutes + ":" + currSeconds;
-            totalDuration.textContent = durationMinutes + ":" + durationSeconds;
-    }
-}
