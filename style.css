@@ -15,7 +15,6 @@ body{
     padding: 30px;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    height: 100%;
 }
 .track-art{
     margin: 25px;
@@ -63,16 +62,13 @@ button:hover{
     align-items: center;
 }
 #seekSlider, #volumeSlider{
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
+    appearance: none;
     height: 5px;
     background: #83a9ff;
     transition: opacity .2s;
 }
 #seekSlider::-webkit-slider-thumb, #volumeSlider::-webkit-slider-thum{
-    -webkit-appearance: none;
-            appearance: none;
+    appearance: none;
     width: 15px;
     height: 15px;
     background: white;
@@ -95,30 +91,14 @@ button:hover{
 i.fa-volume-down, i.fa-volume-up{
     padding: 10px;
 }
-.fa-play-circle, .fa-pause-circle::before, .fa-play-circle::before {
-    font-size: 4.5rem;
-}
-.fa-repeat::before {
-    font-size: 1.8rem;
-}
 i{
     cursor: pointer;
-    font-size: 1.8rem;
 }
 .active{
     color: white;
 }
 .rotate{
-    -webkit-animation: rotation 8s infinite linear;
-            animation: rotation 8s infinite linear;
-}
-@-webkit-keyframes rotation {
-    from{
-        transform: rotate(0deg);
-    }
-    to{
-        transform: rotate(359deg);
-    }
+    animation: rotation 8s infinite linear;
 }
 @keyframes rotation {
     from{
@@ -140,17 +120,7 @@ i{
     width: 10px;
     border-radius: 50px;
     margin: 0 5px;
-    -webkit-animation: animate 1.4s linear infinite;
-            animation: animate 1.4s linear infinite;
-}
-@-webkit-keyframes animate {
-    50%{
-        height: 20%;
-        background: #4286f4;
-    }    
-    100%{
-        height: 100%;
-    }
+    animation: animate 1.4s linear infinite;
 }
 @keyframes animate {
     50%{
@@ -162,77 +132,23 @@ i{
     }
 }
 .stroke:nth-child(1){
-    -webkit-animation-delay: 0s;
-            animation-delay: 0s;
+    animation-delay: 0s;
 }
 .stroke:nth-child(2){
-    -webkit-animation-delay: 0.3s;
-            animation-delay: 0.3s;
+    animation-delay: 0.3s;
 }
 .stroke:nth-child(3){
-    -webkit-animation-delay: 0.6s;
-            animation-delay: 0.6s;
+    animation-delay: 0.6s;
 }
 .stroke:nth-child(4){
-    -webkit-animation-delay: 0.9s;
-            animation-delay: 0.9s;
+    animation-delay: 0.9s;
 }
 .stroke:nth-child(5){
-    -webkit-animation-delay: 0.6s;
-            animation-delay: 0.6s;
+    animation-delay: 0.6s;
 }
 .stroke:nth-child(6){
-    -webkit-animation-delay: 0.3s;
-            animation-delay: 0.3s;
+    animation-delay: 0.3s;
 }
 .stroke:nth-child(7){
-    -webkit-animation-delay: 0s;
-            animation-delay: 0s;
-}
-
-@media screen and (max-width: 500px) {
-    .wrapper{
-        width: 80%;
-    }
-    .track-name {
-        font-size: 1.5rem;
-    }
-    .track-artist {
-        font-size: 1rem;
-    }
-    .time {
-        width: 80%;
-        margin: auto;
-    }
-    .volume {
-        width: 60%;
-        margin: auto;
-    }
-    .buttons {
-        width: 80%;
-    }
-    .fa-play-circle, .fa-pause-circle::before, .fa-play-circle::before {
-        font-size: 3rem;
-    }
-    .fa-repeat::before {
-        font-size: 1.3rem;
-    }
-    i{
-        font-size: 1.3rem;
-    }
-    .buttons{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .buttons {
-        margin: 0 auto;
-        width: 100%;
-    }
-    button {
-        padding: 15px;
-    }
-    #wave {
-        margin-top: 30px;
-    }
+    animation-delay: 0s;
 }
