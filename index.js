@@ -11,7 +11,7 @@ let isRepeat = false;
 let musicList;
 
 function fetchMusics() {
-  fetch("/musiques.json")
+  fetch("./musiques.json")
     .then((response) => response.json())
     .then((data) => {
       musicList = data;
