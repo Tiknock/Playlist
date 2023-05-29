@@ -37,19 +37,22 @@ function loadTrack(trackIndex) {
     "Playing music " + (trackIndex + 1) + " of " + musicList.length;
 
   updateTimer = setInterval(setUpdate, 1000);
-  function whichTrack() {
-    currTrack.addEventListener("ended", () => {
-      if (isRepeat == true) {
-        seekSlider.value = 0;
-        playTrack();
-      } else {
-        nextTrack();
-      }
-    });
-  }
-  whichTrack();
-  randomBgColor();
 }
+
+function whichTrack() {
+  currTrack.addEventListener("ended", () => {
+    if (isRepeat == true) {
+      seekSlider.value = 0;
+      playTrack();
+    } else {
+      nextTrack();
+    }
+  });
+}
+
+fetchMusics();
+whichTrack();
+randomBgColor();
 
 function randomBgColor() {
   let hex = [
